@@ -152,7 +152,7 @@
                                                     <td>{{$tmp_compra->producto->nombre}}</td>
                                                     <td style="text-align: center;vertical-align: middle">{{$tmp_compra->cantidad}}</td>
                                                     <td>
-                                                        <input type="number" class="form-control" id="precio_compra" name="precio_compra[]" value="0">
+                                                        <input type="number" class="form-control" id="precio_compra" name="precio_compra[]" value="{{$tmp_compra->producto->precio_compra}}">
                                                     </td>
                                                     <td id="subtotal" style="text-align: center; vertical-align: middle"></td>
                                                     <td style="text-align: center">

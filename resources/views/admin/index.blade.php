@@ -82,19 +82,57 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 col-sm-6 col-12">
-            <div class="info-box bg-info">
-                <a href="{{url('/admin/roles')}}" class="info-box-icon">
-                    <span class=""><i class="fas fa-id-card"></i></span>
+        <div class="col-md-4 col-sm-6 col-12">
+            <div class="info-box bg-danger">
+                <a href="{{url('/admin/compras')}}" class="info-box-icon">
+                    <span class=""><i class="fas fa-dollar-sign"></i></span>
                 </a>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Roles</span>
-                    <span class="info-box-number">{{$total_roles}}</span>
+                    <span class="info-box-text">Compras</span>
+                    <span class="info-box-number">$ {{number_format($compras,0,',','.')}}</span>
 
 
                     <span class="progress-description">
-                  Roles Registrados
+                  Invertido
+                </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <div class="info-box bg-primary">
+                <a href="{{url('/admin/compras')}}" class="info-box-icon">
+                    <span class=""><i class="fas fa-dollar-sign"></i></span>
+                </a>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Ventas</span>
+                    <span class="info-box-number">$ {{number_format($compras,0,',','.')}}</span>
+
+
+                    <span class="progress-description">
+                        Ingresado
+                </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <div class="col-md-4 col-sm-6 col-12">
+            <div class="info-box bg-warning">
+                <a href="{{url('/admin/compras')}}" class="info-box-icon">
+                    <span class=""><i class="fas fa-dollar-sign"></i></span>
+                </a>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Ganancias</span>
+                    <span class="info-box-number">$ {{number_format($compras,0,',','.')}}</span>
+
+
+                    <span class="progress-description">
+                  Ganado
                 </span>
                 </div>
                 <!-- /.info-box-content -->

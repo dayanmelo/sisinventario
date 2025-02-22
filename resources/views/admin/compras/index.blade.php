@@ -146,8 +146,8 @@
                                                 <td>{{ $detalle->producto->codigo  }}</td>
                                                 <td>{{ $detalle->producto->nombre  }}</td>
                                                 <td>{{ $detalle->cantidad }}</td>
-                                                <td>${{ number_format($detalle->precio_unitario, 0) }}</td>
-                                                <td>${{ number_format($detalle->cantidad * $detalle->precio_unitario, 0) }}</td>
+                                                <td>$ {{ number_format($detalle->precio_unitario, 0,',','.') }}</td>
+                                                <td>$ {{ number_format($detalle->cantidad * $detalle->precio_unitario, 0,',','.') }}</td>
                                             </tr>
                                         @endforeach
                                         </tbody>

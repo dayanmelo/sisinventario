@@ -25,6 +25,7 @@
                     <form action="{{url('/admin/compras',$compra->id)}}" id="form_compra" method="post">
                         @csrf
                         @method('PUT')
+                        <input type="hidden" name="compra_id" id="compra_id" value="{{$compra->id}}">
                         <div class="row">
 
                             <div class="col-md-8">
@@ -179,8 +180,8 @@
                                     <div class="col-md-12">
                                         <label for="proveedor">Proveedor</label>
                                         <div class="input-group">
-                                            <input type="hidden" name="proveedor_id" id="proveedor_id" value="{{$detalle->proveedor_id}}">
-                                            <input type="text" name="proveedor" id="proveedor" class="form-control" value="{{$detalle->proveedor->nombre}}" readonly>
+                                            <input type="hidden" name="proveedor_id" id="proveedor_id" value="{{$compra->proveedor->id}}">
+                                            <input type="text" name="proveedor" id="proveedor" class="form-control" value="{{$compra->proveedor->nombre}}" readonly>
                                             <div class="input-group-append">
                                                 <button type="button" class="input-group-text bg-primary" data-toggle="modal" data-target="#modal-lg2">
                                                     <i class="fas fa-user-plus"></i>
@@ -324,7 +325,7 @@
                 var cantidad = parseFloat(row.find('td:nth-child(4)').text());
                 var precioUnitario = parseFloat(row.find('input[name="precio_compra[]"]').val());
                 var subtotal = cantidad * precioUnitario;
-                row.find('td#subtotal').text(subtotal); // Elimino toFixed(2)
+                row.find('td#subtotal').text(subtotal); // Muestra el subtotal sin decimales fijos
                 return subtotal;
             }
 
@@ -360,7 +361,7 @@
                 $('#tmp tbody tr').each(function() {
                     totalGeneral += calcularSubtotal($(this));
                 });
-                $('#tmp tfoot td:last b').text(totalGeneral); // Elimino toFixed(2)
+                $('#tmp tfoot td:last b').text(totalGeneral); // Muestra el total sin decimales fijos
 
                 // Actualizar el input con el id "total"
                 $('#total').val(totalGeneral);
@@ -374,8 +375,40 @@
                     calcularSubtotal(row);
                     guardarPreciosEnLocalStorage();
                     recalcularTotalGeneral();
+                    actualizarPrecioEnBD(row); // Llamada para actualizar en la base de datos
                 }
             });
+
+            // Evento al cambiar el valor del precio
+            $('#tmp tbody').on('change', 'input[name="precio_compra[]"]', function() {
+                var row = $(this).closest('tr');
+                calcularSubtotal(row);
+                guardarPreciosEnLocalStorage();
+                recalcularTotalGeneral();
+                actualizarPrecioEnBD(row); // Llamada para actualizar en la base de datos
+            });
+
+            // Función para actualizar el precio en la base de datos usando AJAX
+            function actualizarPrecioEnBD(row) {
+                var precio_unitario = row.find('input[name="precio_compra[]"]').val();
+                var detalleId = row.find('.delete-btn').data('id');
+
+                // Enviar la actualización con AJAX
+                $.ajax({
+                    url: "{{url("admin/compras/detalles")}}/"+detalleId,
+                    method: 'PUT',
+                    data: {
+                        precio_unitario: precio_unitario,
+                        _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        console.log('Precio actualizado:', response.message);
+                    },
+                    error: function(xhr) {
+                        console.log('Error al actualizar:', xhr.responseText);
+                    }
+                });
+            }
 
             // Cargar los precios desde localStorage al cargar la página
             cargarPreciosDesdeLocalStorage();
@@ -383,6 +416,9 @@
             // Recalcular el total general al cargar la página
             recalcularTotalGeneral();
         });
+
+
+
 
 
 
@@ -415,7 +451,7 @@
             var id= $(this).data('id');
             if (id){
                 $.ajax({
-                    url:"{{url('/admin/compras/create/tmp')}}/"+id,
+                    url:"{{url('/admin/compras/detalle')}}/"+id,
                     type:'POST',
                     data:{
                         _token:'{{csrf_token()}}',
@@ -450,15 +486,19 @@
             if (e.which === 13){
                 var codigo = $(this).val();
                 var cantidad = $('#cantidad').val();
+                var id_compra = $('#compra_id').val();
+                var proveedor_id = $('#proveedor_id').val();
 
                 if (codigo.length > 0){
                     $.ajax({
-                        url:"{{route('admin.compras.tmp_compras')}}",
+                        url:"{{route('admin.detalle.compras.store')}}",
                         method:'POST',
                         data:{
                             _token:'{{csrf_token()}}',
                             codigo: codigo,
                             cantidad: cantidad,
+                            id_compra: id_compra,
+                            proveedor_id: proveedor_id,
                         },
                         success:function (response) {
                             if (response.success){

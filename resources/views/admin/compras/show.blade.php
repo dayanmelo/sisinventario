@@ -59,11 +59,11 @@
                     <div class="col-sm-4 invoice-col">
                         De
                         <address>
-                            <strong>{{$proveedor->proveedor->nombre}}</strong><br>
-                            {{$proveedor->proveedor->empresa}}<br>
-                            {{$proveedor->proveedor->direccion}}<br>
-                            Telefono: {{$proveedor->proveedor->telefono}}<br>
-                            Correo: {{$proveedor->proveedor->correo}}
+                            <strong>{{$compra->proveedor->nombre}}</strong><br>
+                            {{$compra->proveedor->empresa}}<br>
+                            {{$compra->proveedor->direccion}}<br>
+                            Telefono: {{$compra->proveedor->telefono}}<br>
+                            Correo: {{$compra->proveedor->correo}}
                         </address>
                     </div>
                     <!-- /.col -->
