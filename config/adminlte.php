@@ -381,6 +381,11 @@ return [
             'url' => 'admin/compras',
             'icon' => 'fas fa-w fa-cart-plus',
         ],
+        [
+            'text' => ' Clientes',
+            'url' => 'admin/clientes',
+            'icon' => 'fas fa-w fa-user-circle',
+        ],
         /*[
             'text' => 'multilevel',
             'icon' => 'fas fa-fw fa-share',
