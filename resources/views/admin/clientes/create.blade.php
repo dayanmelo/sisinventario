@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="nombre">Nomnre</label>
+                                    <label for="nombre">Nombre</label>
                                     <input type="text" name="nombre" value="{{old('nombre')}}" id="nombre" class="form-control" required autofocus>
                                     @error('nombre')
                                     <small style="color: red;">{{$message}}</small>

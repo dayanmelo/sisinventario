@@ -382,9 +382,19 @@ return [
             'icon' => 'fas fa-w fa-cart-plus',
         ],
         [
+            'text' => ' Cierres',
+            'url' => 'admin/cierres',
+            'icon' => 'fas fa-w fa-cash-register',
+        ],
+        [
             'text' => ' Clientes',
             'url' => 'admin/clientes',
             'icon' => 'fas fa-w fa-user-circle',
+        ],
+        [
+            'text' => ' Ventas',
+            'url' => 'admin/ventas',
+            'icon' => 'fas fa-w fa-file-invoice-dollar',
         ],
         /*[
             'text' => 'multilevel',

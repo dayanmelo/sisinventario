@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1><b>Compras</b>/Modificar Compra</h1>
+                <h1><b>Ventas</b>/Crear Venta</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -20,12 +20,10 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-outline card-warning">
+            <div class="card card-outline card-success">
                 <div class="card-body">
-                    <form action="{{url('/admin/compras',$compra->id)}}" id="form_compra" method="post">
+                    <form action="{{url('/admin/ventas/create')}}" id="form_venta" method="post">
                         @csrf
-                        @method('PUT')
-                        <input type="hidden" name="compra_id" id="compra_id" value="{{$compra->id}}">
                         <div class="row">
 
                             <div class="col-md-8">
@@ -143,19 +141,19 @@
                                             $total = 0;
                                             $costo = 0;
                                             ?>
-                                        @foreach($compra->detalles as $detalle)
+                                        @foreach($tmp_ventas as $tmp_venta)
 
                                             <tr>
                                                 <td style="text-align: center">{{$cont++}}</td>
-                                                <td>{{$detalle->producto->codigo}}</td>
-                                                <td>{{$detalle->producto->nombre}}</td>
-                                                <td style="text-align: center;vertical-align: middle">{{$detalle->cantidad}}</td>
+                                                <td>{{$tmp_venta->producto->codigo}}</td>
+                                                <td>{{$tmp_venta->producto->nombre}}</td>
+                                                <td style="text-align: center;vertical-align: middle">{{$tmp_venta->cantidad}}</td>
                                                 <td>
-                                                    <input type="number" class="form-control" id="precio_compra" name="precio_compra[]" value="{{$detalle->precio_unitario}}">
+                                                    <input type="number" class="form-control" id="precio_venta" name="precio_venta[]" value="{{$tmp_venta->producto->precio_venta}}">
                                                 </td>
                                                 <td id="subtotal" style="text-align: center; vertical-align: middle"></td>
                                                 <td style="text-align: center">
-                                                    <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{$detalle->id}}"><i class="far fa-times-circle"></i></button>
+                                                    <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{$tmp_venta->id}}"><i class="far fa-times-circle"></i></button>
                                                 </td>
                                             </tr>
                                             @php
@@ -178,12 +176,12 @@
                             <div class="col-md-4">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label for="proveedor">Proveedor</label>
+                                        <label for="cliente">Cliente</label>
                                         <div class="input-group">
-                                            <input type="hidden" name="proveedor_id" id="proveedor_id" value="{{$compra->proveedor->id}}">
-                                            <input type="text" name="proveedor" id="proveedor" class="form-control" value="{{$compra->proveedor->nombre}}" readonly>
+                                            <input type="hidden" name="cliente_id" id="cliente_id">
+                                            <input type="text" name="cliente" id="cliente" class="form-control" readonly>
                                             <div class="input-group-append">
-                                                <button type="button" class="input-group-text bg-primary" data-toggle="modal" data-target="#modal-lg2">
+                                                <button type="button" class="input-group-text bg-success" data-toggle="modal" data-target="#modal-lg2">
                                                     <i class="fas fa-user-plus"></i>
                                                 </button>
 
@@ -193,43 +191,39 @@
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h4 class="modal-title">Listado de Proveedores</h4>
+                                                                <h4 class="modal-title">Listado de Clientes</h4>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <table class="table table-bordered table-hover table-sm table-striped table-responsive" id="mitabla2">
+                                                            <div class="modal-body table-responsive">
+                                                                <table class="table table-bordered table-hover table-sm table-striped " id="mitabla2">
                                                                     <thead>
                                                                     <tr>
                                                                         <th style="text-align: center">N°</th>
-                                                                        <th style="text-align: center">Accion</th>                                                                <th>Empresa</th>
-                                                                        <th>Direccion Empresa</th>
-                                                                        <th>Nombre Proveedor</th>
-                                                                        <th>Celular Proveedor</th>
-                                                                        <th>Correo Empresa</th>
-
+                                                                        <th style="text-align: center">Accion</th>
+                                                                        <th>Nombre</th>
+                                                                        <th>Cedula</th>
+                                                                        <th>Celular</th>
+                                                                        <th>Direccion</th>
+                                                                        <th>Correo</th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
                                                                         <?php
                                                                         $contador = 1;
                                                                         ?>
-                                                                    @foreach($proveedores as $proveedore)
+                                                                    @foreach($clientes as $cliente)
                                                                         <tr>
                                                                             <td style="text-align: center">{{$contador++}}</td>
                                                                             <td style="text-align: center; vertical-align: middle">
-                                                                                <button type="button" class="btn btn-info seleccionar2-btn" data-proveedor="{{$proveedore->nombre}}" data-id="{{$proveedore->id}}"><i class="fas fa-w fa-check"></i></button>
+                                                                                <button type="button" class="btn btn-info seleccionar2-btn" data-cliente="{{$cliente->nombre_cliente}}" data-id="{{$cliente->id}}"><i class="fas fa-w fa-check"></i></button>
                                                                             </td>
-                                                                            <td>
-                                                                                {{$proveedore->empresa}}
-                                                                            </td>
-                                                                            <td>{{$proveedore->direccion}}</td>
-                                                                            <td>{{$proveedore->nombre}}</td>
-                                                                            <td>
-                                                                                {{$proveedore->celular}}
-                                                                            </td>
-                                                                            <td>{{$proveedore->correo}}</td>
+                                                                            <td>{{$cliente->nombre_cliente}}</td>
+                                                                            <td>{{$cliente->cedula}}</td>
+                                                                            <td>{{$cliente->telefono}}</td>
+                                                                            <td>{{$cliente->direccion}}</td>
+                                                                            <td>{{$cliente->correo}}</td>
                                                                         </tr>
                                                                     @endforeach
 
@@ -248,25 +242,102 @@
                                                 <!-- /.Final modal -->
 
                                             </div>
+                                            <div class="input-group-append">
+                                                <button type="button" class="input-group-text bg-primary" data-toggle="modal" data-target="#modal-lgR">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+
+                                                <!-- /.modal -->
+
+                                                <div class="modal fade" id="modal-lgR" style="display: none;" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Crear Cliente</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form action="{{url('/admin/clientes/create')}}" method="post">
+                                                                    @csrf
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <label for="nombre">Nombre</label>
+                                                                                <input type="text" value="{{old('nombre')}}" id="nombre" class="form-control" autofocus>
+                                                                                @error('nombre')
+                                                                                <small style="color: red;">{{$message}}</small>
+                                                                                @enderror
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <label for="cedula">Cedula</label>
+                                                                                <input type="text" value="{{old('cedula')}}" id="cedula" class="form-control">
+                                                                                @error('cedula')
+                                                                                <small style="color: red;">{{$message}}</small>
+                                                                                @enderror
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <label for="celular">Celular</label>
+                                                                                <input type="text"  value="{{old('celular')}}" id="celular" class="form-control">
+                                                                                @error('celular')
+                                                                                <small style="color: red;">{{$message}}</small>
+                                                                                @enderror
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <label for="direccion">Dirección</label>
+                                                                                <input type="text" value="{{old('direccion')}}" id="direccion" class="form-control" >
+                                                                                @error('direccion')
+                                                                                <small style="color: red;">{{$message}}</small>
+                                                                                @enderror
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="form-group">
+                                                                                <label for="correo">Correo</label>
+                                                                                <input type="email" value="{{old('correo')}}" id="correo" class="form-control" >
+                                                                                @error('correo')
+                                                                                <small style="color: red;">{{$message}}</small>
+                                                                                @enderror
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer justify-content-between">
+                                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                                        <button type="button" onclick="guardar_cliente()" class="btn btn-outline-success"><i class="fas fa-w fa-check"></i> Guardar</button>
+
+                                                                    </div>
+
+                                                                </form>
+                                                            </div>
+
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+
+                                                <!-- /.Final modal -->
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="form-group">
-                                            <label for="fecha">Fecha de compra</label>
-                                            <input type="datetime-local" class="form-control" value="{{$compra->fecha}}" id="fecha" name="fecha">
+                                            <label for="fecha">Fecha de venta</label>
+                                            <input type="datetime-local" class="form-control" value="{{old('fecha',date('Y-m-d H:i:s'))}}" id="fecha" name="fecha">
                                             @error('fecha')
-                                            <small style="color: red">{{$message}}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="comprobante">Comprobante</label>
-                                            <input type="text" class="form-control" value="{{$compra->comprobante}}" id="comprobante" name="comprobante">
-                                            @error('comprobante')
                                             <small style="color: red">{{$message}}</small>
                                             @enderror
                                         </div>
@@ -276,7 +347,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="total">Total</label>
-                                            <input type="text" style="background-color: yellow; color: black;text-align: center;font-size: 20px" class="form-control" id="total" name="total" value="{{$compra->precio_compra}}" readonly>
+                                            <input type="text" style="background-color: yellow; color: black;text-align: center;font-size: 20px" class="form-control" id="total" name="total" readonly>
                                             @error('total')
                                             <small style="color: red">{{$message}}</small>
                                             @enderror
@@ -287,14 +358,14 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-outline-warning btn-block"><i class="fas fa-w fa-pen-square"></i> Modificar</button>
+                                            <button type="submit" class="btn btn-outline-success btn-block"><i class="fas fa-w fa-check"></i> Guardar</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <a href="{{url('admin/compras')}}" class="btn btn-secondary btn-block"><i class="fas fa-w fa-arrow-left"></i> Volver</a>
+                                            <a href="{{url('admin/ventas')}}" class="btn btn-secondary btn-block"><i class="fas fa-w fa-arrow-left"></i> Volver</a>
                                         </div>
                                     </div>
                                 </div>
@@ -319,13 +390,41 @@
 @section('js')
     <script>
 
+        function guardar_cliente() {
+            const data = {
+                nombre:$('#nombre').val(),
+                cedula:$('#cedula').val(),
+                celular:$('#celular').val(),
+                direccion:$('#direccion').val(),
+                correo:$('#correo').val(),
+                _token:'{{csrf_token()}}',
+            };
+            $.ajax({
+               url:'{{route("admin.ventas.cliente.store")}}',
+                type:'POST',
+                data: data,
+                success:function (response) {
+                   $('#modal-lgR').modal('hide');
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire({
+                        position: "center",
+                        title: "No fue posible registrar al cliente",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            });
+        }
+
         $(document).ready(function() {
             // Función para calcular el subtotal de una fila
             function calcularSubtotal(row) {
                 var cantidad = parseFloat(row.find('td:nth-child(4)').text());
-                var precioUnitario = parseFloat(row.find('input[name="precio_compra[]"]').val());
+                var precioUnitario = parseFloat(row.find('input[name="precio_venta[]"]').val());
                 var subtotal = cantidad * precioUnitario;
-                row.find('td#subtotal').text(subtotal); // Muestra el subtotal sin decimales fijos
+                row.find('td#subtotal').text(subtotal); // Elimino toFixed(2)
                 return subtotal;
             }
 
@@ -334,21 +433,21 @@
                 var precios = {};
                 $('#tmp tbody tr').each(function() {
                     var id = $(this).find('.delete-btn').data('id');
-                    var precio = $(this).find('input[name="precio_compra[]"]').val();
+                    var precio = $(this).find('input[name="precio_venta[]"]').val();
                     precios[id] = precio;
                 });
-                localStorage.setItem('precios_compra', JSON.stringify(precios));
+                localStorage.setItem('precios_venta', JSON.stringify(precios));
             }
 
             // Función para cargar los precios desde localStorage
             function cargarPreciosDesdeLocalStorage() {
-                var preciosGuardados = localStorage.getItem('precios_compra');
+                var preciosGuardados = localStorage.getItem('precios_venta');
                 if (preciosGuardados) {
                     var precios = JSON.parse(preciosGuardados);
                     $('#tmp tbody tr').each(function() {
                         var id = $(this).find('.delete-btn').data('id');
                         if (precios[id]) {
-                            $(this).find('input[name="precio_compra[]"]').val(precios[id]);
+                            $(this).find('input[name="precio_venta[]"]').val(precios[id]);
                             calcularSubtotal($(this)); // Recalcular el subtotal al cargar el precio
                         }
                     });
@@ -361,54 +460,22 @@
                 $('#tmp tbody tr').each(function() {
                     totalGeneral += calcularSubtotal($(this));
                 });
-                $('#tmp tfoot td:last b').text(totalGeneral); // Muestra el total sin decimales fijos
+                $('#tmp tfoot td:last b').text(totalGeneral); // Elimino toFixed(2)
 
                 // Actualizar el input con el id "total"
                 $('#total').val(totalGeneral);
             }
 
             // Evento al presionar "Enter" en el input "precio_compra"
-            $('#tmp tbody').on('keypress', 'input[name="precio_compra[]"]', function(event) {
+            $('#tmp tbody').on('keypress', 'input[name="precio_venta[]"]', function(event) {
                 if (event.key === 'Enter') {
                     event.preventDefault();
                     var row = $(this).closest('tr');
                     calcularSubtotal(row);
                     guardarPreciosEnLocalStorage();
                     recalcularTotalGeneral();
-                    actualizarPrecioEnBD(row); // Llamada para actualizar en la base de datos
                 }
             });
-
-            // Evento al cambiar el valor del precio
-            $('#tmp tbody').on('change', 'input[name="precio_compra[]"]', function() {
-                var row = $(this).closest('tr');
-                calcularSubtotal(row);
-                guardarPreciosEnLocalStorage();
-                recalcularTotalGeneral();
-                actualizarPrecioEnBD(row); // Llamada para actualizar en la base de datos
-            });
-
-            // Función para actualizar el precio en la base de datos usando AJAX
-            function actualizarPrecioEnBD(row) {
-                var precio_unitario = row.find('input[name="precio_compra[]"]').val();
-                var detalleId = row.find('.delete-btn').data('id');
-
-                // Enviar la actualización con AJAX
-                $.ajax({
-                    url: "{{url("admin/compras/detalles")}}/"+detalleId,
-                    method: 'PUT',
-                    data: {
-                        precio_unitario: precio_unitario,
-                        _token: $('meta[name="csrf-token"]').attr('content')
-                    },
-                    success: function(response) {
-                        console.log('Precio actualizado:', response.message);
-                    },
-                    error: function(xhr) {
-                        console.log('Error al actualizar:', xhr.responseText);
-                    }
-                });
-            }
 
             // Cargar los precios desde localStorage al cargar la página
             cargarPreciosDesdeLocalStorage();
@@ -428,10 +495,10 @@
         });
 
         $('.seleccionar2-btn').click(function () {
-            var proveedor = $(this).data('proveedor');
+            var cliente = $(this).data('cliente');
             var id = $(this).data('id');
-            $('#proveedor').val(proveedor);
-            $('#proveedor_id').val(id);
+            $('#cliente').val(cliente);
+            $('#cliente_id').val(id);
             $('#modal-lg2').modal('hide');
         });
 
@@ -439,7 +506,7 @@
             var id= $(this).data('id');
             if (id){
                 $.ajax({
-                    url:"{{url('/admin/compras/detalle')}}/"+id,
+                    url:"{{url('/admin/ventas/create/tmp')}}/"+id,
                     type:'POST',
                     data:{
                         _token:'{{csrf_token()}}',
@@ -465,7 +532,7 @@
         });
         $('#codigo').focus();
 
-        $('#form_compra').on('keypress', function (e) {
+        $('#form_venta').on('keypress', function (e) {
             if (e.keyCode === 13){
                 e.preventDefault();
             }
@@ -474,19 +541,15 @@
             if (e.which === 13){
                 var codigo = $(this).val();
                 var cantidad = $('#cantidad').val();
-                var id_compra = $('#compra_id').val();
-                var proveedor_id = $('#proveedor_id').val();
 
                 if (codigo.length > 0){
                     $.ajax({
-                        url:"{{route('admin.detalle.compras.store')}}",
+                        url:"{{route('admin.ventas.tmp_ventas')}}",
                         method:'POST',
                         data:{
                             _token:'{{csrf_token()}}',
                             codigo: codigo,
                             cantidad: cantidad,
-                            id_compra: id_compra,
-                            proveedor_id: proveedor_id,
                         },
                         success:function (response) {
                             if (response.success){
@@ -508,6 +571,7 @@
             }
 
         });
+
     </script>
     <script>
 
@@ -574,7 +638,6 @@
 
     </script>
 @stop
-
 
 
 
