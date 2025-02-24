@@ -67,7 +67,7 @@
                                                     text: "Si elimina esta categoria, todo producto asociado a ella se eliminara",
                                                     showDenyButton: true,
                                                     confirmButtonText: "Eliminar",
-                                                    denyButtonText: `No,Eliminar`,
+                                                    denyButtonText: `Cancelar`,
                                                     denyButtonColor:'#f50430',
                                                 }).then((result) => {
                                                     /* Read more about isConfirmed, isDenied below */

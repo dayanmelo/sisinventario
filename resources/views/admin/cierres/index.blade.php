@@ -4,11 +4,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1><b>Compras</b>/Listado de Compras</h1>
+                <h1><b>Cierres</b>/Listado de Cierres</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <a href="{{url('/admin/compras/create')}}" class="btn btn-sm btn-primary">
+                    <a href="{{url('/admin/cierres/create')}}" class="btn btn-sm btn-primary">
                         Crear nuevo
                     </a>
                 </ol>
@@ -35,9 +35,9 @@
                         <tr>
                             <th style="text-align: center">N°</th>
                             <th>Fecha de compra</th>
-                            <th>Comprobante</th>
                             <th>Productos</th>
                             <th>Total</th>
+                            <th>Ganancia</th>
                             <th style="text-align: center">Acciones</th>
                         </tr>
                         </thead>
@@ -45,38 +45,40 @@
                         <?php
                         $contador = 1;
                         ?>
-                        @foreach($compras as $compra)
+                        @foreach($cierres as $cierre)
                             <tr>
                                 <td style="text-align: center">{{$contador++}}</td>
-                                <td>{{ \Carbon\Carbon::parse($compra->fecha)->format('d/m/Y h:i a') }}</td>
-                                <td>
-                                    {{$compra->comprobante}}
-                                </td>
+                                <td>{{ \Carbon\Carbon::parse($cierre->fecha)->format('d/m/Y h:i a') }}</td>
+
                                 <td style="text-align: center; vertical-align: middle">
                                     <button class="btn btn-info btn-sm"
                                             data-toggle="modal"
-                                            data-target="#modal-productos-{{$compra->id}}"
-                                            data-detalles='@json($compra->detalles)'>
+                                            data-target="#modal-productos-{{$cierre->id}}"
+                                            data-detalles='@json($cierre->detallescierre)'>
                                         Ver Productos
                                     </button>
                                 </td>
 
+                                <td style=" text-align: center; vertical-align: middle">
+                                    <b class="badge bg-success" style="font-size: 15px;">$ {{number_format($cierre->precio_total,0,',','.')}}</b>
+                                </td>
 
                                 <td style=" text-align: center; vertical-align: middle">
-                                    <b class="badge bg-success" style="font-size: 15px;">$ {{number_format($compra->precio_compra,0,',','.')}}</b>
+                                    <b class="badge bg-success" style="font-size: 15px;">$ {{number_format($cierre->ganancia,0,',','.')}}</b>
                                 </td>
                                 <td style="text-align: center">
                                     <div class="btn-group">
-                                        <a href="{{url('/admin/compras',$compra->id)}}" class="btn btn-info"><i class="fas fa-w fa-eye"></i></a>
-                                        <a href="{{url('/admin/compras/'.$compra->id.'/edit')}}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
-                                        <form action="{{url('/admin/compras',$compra->id)}}" method="post"
-                                              onclick="preguntar{{$compra->id}}(event)" id="miFormulario{{$compra->id}}">
+                                        <a href="{{url('/admin/cierres',$cierre->id)}}" class="btn btn-info"><i class="fas fa-w fa-eye"></i></a>
+                                        <a href="{{url('/admin/cierres/'.$cierre->id.'/edit')}}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{url('/admin/cierres/pdf',$cierre->id)}}" target="_blank" class="btn btn-warning"><i class="fas fa-file-invoice-dollar"></i></a>
+                                        <form action="{{url('/admin/cierres',$cierre->id)}}" method="post"
+                                              onclick="preguntar{{$cierre->id}}(event)" id="miFormulario{{$cierre->id}}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" style="border-radius: 0px 5px 5px 0px" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                         </form>
                                         <script>
-                                            function preguntar{{$compra->id}}(event){
+                                            function preguntar{{$cierre->id}}(event){
                                                 event.preventDefault();
                                                 Swal.fire({
                                                     title: "¿Seguro desea eliminar este registro?",
@@ -87,7 +89,7 @@
                                                 }).then((result) => {
                                                     /* Read more about isConfirmed, isDenied below */
                                                     if (result.isConfirmed) {
-                                                        var form = $('#miFormulario{{$compra->id}}');
+                                                        var form = $('#miFormulario{{$cierre->id}}');
                                                         form.submit();
                                                         Swal.fire({
                                                             position: "center",
@@ -117,37 +119,41 @@
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
-            @foreach ($compras as $compra)
-                <div class="modal fade" id="modal-productos-{{ $compra->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+            @foreach ($cierres as $cierre)
+                <div class="modal fade" id="modal-productos-{{ $cierre->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header bg-info">
-                                <h5 class="modal-title">Productos de la Compra <strong style="font-size: 20px" class="badge bg-primary">{{ \Carbon\Carbon::parse($compra->fecha)->format('d/m/Y h:i a') }}</strong></h5>
+                                <h5 class="modal-title">Productos del cierre <strong style="font-size: 20px" class="badge bg-primary">{{ \Carbon\Carbon::parse($cierre->fecha)->format('d/m/Y h:i a') }}</strong></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <!-- Tabla de productos -->
-                                <div class="table-responsive">
+                                <div class="table table-responsive">
                                     <table class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
                                             <th>Código</th>
                                             <th>Nombre</th>
                                             <th>Cantidad</th>
-                                            <th>Precio Unitario</th>
+                                            <th>Precio Compra</th>
+                                            <th>Precio Venta</th>
                                             <th>Total</th>
+                                            <th>Ganancia</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach ($compra->detalles as $detalle)
+                                        @foreach ($cierre->detallescierre as $detalle)
                                             <tr>
                                                 <td>{{ $detalle->producto->codigo  }}</td>
                                                 <td>{{ $detalle->producto->nombre  }}</td>
                                                 <td>{{ $detalle->cantidad }}</td>
-                                                <td>$ {{ number_format($detalle->precio_unitario, 0,',','.') }}</td>
-                                                <td>$ {{ number_format($detalle->cantidad * $detalle->precio_unitario, 0,',','.') }}</td>
+                                                <td>$ {{ number_format($detalle->precio_compra, 0,',','.') }}</td>
+                                                <td>$ {{ number_format($detalle->precio_venta, 0,',','.') }}</td>
+                                                <td>$ {{ number_format($detalle->cantidad * $detalle->precio_venta, 0,',','.') }}</td>
+                                                <td>$ {{ number_format(($detalle->precio_venta - $detalle->precio_compra) * $detalle->cantidad, 0,',','.') }}</td>
                                             </tr>
                                         @endforeach
                                         </tbody>
@@ -233,3 +239,4 @@
     </script>
 
 @stop
+

@@ -109,7 +109,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Ventas</span>
-                    <span class="info-box-number">$ {{number_format($compras,0,',','.')}}</span>
+                    <span class="info-box-number">$ {{number_format($cierres,0,',','.')}}</span>
 
 
                     <span class="progress-description">
@@ -128,7 +128,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Ganancias</span>
-                    <span class="info-box-number">$ {{number_format($compras,0,',','.')}}</span>
+                    <span class="info-box-number">$ {{number_format($ganancias,0,',','.')}}</span>
 
 
                     <span class="progress-description">

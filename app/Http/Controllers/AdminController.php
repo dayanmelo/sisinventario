@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Cierre;
 use App\Models\Compra;
 use App\Models\Empresa;
 use App\Models\Producto;
@@ -20,6 +21,8 @@ class AdminController extends Controller
         $total_categorias = Categoria::count();
         $total_productos = Producto::count();
         $compras = Compra::where('empresa_id',Auth::user()->empresa_id)->sum('precio_compra');
+        $cierres = Cierre::where('empresa_id',Auth::user()->empresa_id)->sum('precio_total');
+        $ganancias = Cierre::where('empresa_id',Auth::user()->empresa_id)->sum('ganancia');
 
 
         $empresa_id =Auth::check() ? Auth::User()->empresa_id : redirect()->route('login')->send();
@@ -31,6 +34,8 @@ class AdminController extends Controller
             'total_usuarios',
             'total_categorias',
         'total_productos',
-        'compras',));
+        'compras',
+        'cierres',
+        'ganancias'));
     }
 }

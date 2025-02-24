@@ -97,7 +97,7 @@
                                                         form.submit();
                                                         Swal.fire({
                                                             position: "center",
-                                                            title: "Se anulo la Venta exitosamente",
+                                                            title: "Venta Anulada",
                                                             showConfirmButton: false,
                                                             timer: 1500
                                                         });

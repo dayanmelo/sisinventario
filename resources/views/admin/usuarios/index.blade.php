@@ -71,7 +71,7 @@
                                                     title: "¿Seguro desea eliminar este registro?",
                                                     showDenyButton: true,
                                                     confirmButtonText: "Eliminar",
-                                                    denyButtonText: `No,Eliminar`,
+                                                    denyButtonText: `Cancelar`,
                                                     denyButtonColor:'#f50430',
                                                 }).then((result) => {
                                                     /* Read more about isConfirmed, isDenied below */
