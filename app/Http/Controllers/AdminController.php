@@ -17,9 +17,9 @@ class AdminController extends Controller
     public function index(){
 
         $total_roles = Role::count();
-        $total_usuarios = User::count();
-        $total_categorias = Categoria::count();
-        $total_productos = Producto::count();
+        $total_usuarios = User::where('empresa_id',Auth::user()->empresa_id)->count();
+        $total_categorias = Categoria::where('empresa_id',Auth::user()->empresa_id)->count();
+        $total_productos = Producto::where('empresa_id',Auth::user()->empresa_id)->count();
         $compras = Compra::where('empresa_id',Auth::user()->empresa_id)->sum('precio_compra');
         $cierres = Cierre::where('empresa_id',Auth::user()->empresa_id)->sum('precio_total');
         $ganancias = Cierre::where('empresa_id',Auth::user()->empresa_id)->sum('ganancia');

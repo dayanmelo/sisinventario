@@ -74,6 +74,7 @@ Route::get('/admin/productos/{id}',[App\Http\Controllers\ProductoController::cla
 Route::get('/admin/productos/{id}/edit',[App\Http\Controllers\ProductoController::class,'edit'])->name('admin.productos.edit')->middleware('auth');
 Route::put('/admin/productos/{id}',[App\Http\Controllers\ProductoController::class,'update'])->name('admin.productos.update')->middleware('auth');
 Route::delete('/admin/productos/{id}',[App\Http\Controllers\ProductoController::class,'destroy'])->name('admin.productos.destroy')->middleware('auth');
+Route::get('/admin/productos/pdf',[App\Http\Controllers\ProductoController::class,'pdf'])->name('admin.productos.pdf')->middleware('auth');
 
 
 //Rutas para proveedores
@@ -139,7 +140,7 @@ Route::post('/admin/ventas/detalle/create/',[App\Http\Controllers\DetalleVentaCo
 Route::put('/admin/ventas/detalles/{id}',[App\Http\Controllers\VentaController::class,'actualizarDetalle'])->name('admin.ventas.actualizarDetalle')->middleware('auth');
 
 
-//Rutas para ventas
+//Rutas para cierres
 Route::get('/admin/cierres',[App\Http\Controllers\CierreController::class,'index'])->name('admin.cierres.index')->middleware('auth');
 Route::get('/admin/cierres/create',[App\Http\Controllers\CierreController::class,'create'])->name('admin.cierres.create')->middleware('auth');
 Route::post('/admin/cierres/create',[App\Http\Controllers\CierreController::class,'store'])->name('admin.cierres.store')->middleware('auth');
@@ -151,12 +152,12 @@ Route::delete('/admin/cierres/{id}',[App\Http\Controllers\CierreController::clas
 Route::post('/admin/cierres/cliente/create',[App\Http\Controllers\CierreController::class,'cliente_store'])->name('admin.cierres.cliente.store')->middleware('auth');
 
 
-//Rutas para tmp_ventas
+//Rutas para tmp_cierres
 Route::post('/admin/cierres/create/tmp',[App\Http\Controllers\TmpCierreController::class,'tmp_cierres'])->name('admin.cierres.tmp_cierres')->middleware('auth');
 Route::delete('/admin/cierres/create/tmp/{id}',[App\Http\Controllers\TmpCierreController::class,'destroy'])->name('admin.cierres.tmp_cierres.destroy')->middleware('auth');
 
 
-//Rutas para detalles de las ventas
+//Rutas para detalles de los cierres
 Route::delete('/admin/cierres/detalle/{id}',[App\Http\Controllers\DetalleCierreController::class,'destroy'])->name('admin.detalle.cierres.destroy')->middleware('auth');
 Route::post('/admin/cierres/detalle/create/',[App\Http\Controllers\DetalleCierreController::class,'store'])->name('admin.detalle.cierres.store')->middleware('auth');
 Route::put('/admin/cierres/detalles/{id}',[App\Http\Controllers\CierreController::class,'actualizarDetalle'])->name('admin.cierres.actualizarDetalle')->middleware('auth');

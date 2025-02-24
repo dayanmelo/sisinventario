@@ -11,13 +11,6 @@
             {{-- Card Box --}}
             <div class="card card-outline card-success">
 
-                {{-- Card Header --}}
-                <div class="card-header {{ config('adminlte.classes_auth_header', '') }}">
-                    <h3 class="card-title float-none text-center">
-                        <b></b>
-                    </h3>
-                </div>
-
                 {{-- Card Body --}}
                 <div class="card-body {{ $auth_type ?? 'login' }}-card-body {{ config('adminlte.classes_auth_body', '') }}">
                     <form action="{{url('/admin/configuracion',$empresa->id)}}" method="post" enctype="multipart/form-data">

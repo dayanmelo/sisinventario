@@ -19,7 +19,7 @@ class CierreController extends Controller
      */
     public function index()
     {
-        $cierres = Cierre::with('detallescierre')->get();
+        $cierres = Cierre::where('empresa_id',Auth::user()->empresa_id)->with('detallescierre')->get();
         return view('admin.cierres.index', compact('cierres'));
     }
 
@@ -119,8 +119,8 @@ class CierreController extends Controller
      */
     public function edit($id)
     {
-        $cierre = Cierre::with('detallescierre')->findOrFail($id);
-        $productos = Producto::all();
+        $cierre = Cierre::where('empresa_id',Auth::user()->empresa_id)->with('detallescierre')->findOrFail($id);
+        $productos = Producto::where('empresa_id',Auth::user()->empresa_id)->get();
         //return response()->json($cierre);
         return view('admin.cierres.edit', compact('productos',  'cierre'));
 
@@ -132,7 +132,7 @@ class CierreController extends Controller
         $detalles = DetalleCierre::with('producto')->where('cierre_id',$id)->get();
         $id_empresa = Auth::user()->empresa_id;
         $empresa = Empresa::where('id',$id_empresa)->first();
-        $pdf = PDF::loadView('admin.cierres.pdf', compact('empresa', 'cierre', 'detalles'));
+        $pdf = Pdf::loadView('admin.cierres.pdf', compact('empresa', 'cierre', 'detalles'));
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }

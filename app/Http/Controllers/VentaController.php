@@ -19,7 +19,7 @@ class VentaController extends Controller
      */
     public function index()
     {
-        $ventas = Venta::with('detallesventa','cliente')->orderByRaw("estado = 1, created_at DESC")->get();
+        $ventas = Venta::with('detallesventa','cliente')->orderByRaw("estado = 1, created_at DESC")->where('empresa_id',Auth::user()->empresa_id)->get();
         return view('admin.ventas.index', compact('ventas'));
     }
 
@@ -131,8 +131,8 @@ class VentaController extends Controller
     public function edit($id)
     {
         $venta = Venta::with('detallesventa','cliente')->findOrFail($id);
-        $productos = Producto::all();
-        $clientes = Cliente::all();
+        $productos = Producto::where('empresa_id',Auth::user()->empresa_id)->get();
+        $clientes = Cliente::where('empresa_id',Auth::user()->empresa_id)->get();
         return view('admin.ventas.edit', compact('productos', 'clientes', 'venta'));
     }
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Empresa;
 use App\Models\Producto;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -15,8 +17,14 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::with('categoria')->get();
+        $productos = Producto::with('categoria')->where('empresa_id',Auth::user()->empresa_id)->get();
         return view('admin.productos.index', compact('productos'));
+    }
+
+    public function pdf()
+    {
+        $pdf = Pdf::loadView('/admin/productos/pdf');
+        return $pdf->stream();
     }
 
 
@@ -25,7 +33,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all();
+        $categorias = Categoria::where('empresa_id',Auth::user()->empresa_id)->get();
         return view('admin.productos.create', compact('categorias'));
     }
 
@@ -85,9 +93,11 @@ class ProductoController extends Controller
     public function edit($id)
     {
         $producto = Producto::find($id);
-        $categorias = Categoria::all();
+        $categorias = Categoria::where('empresa_id',Auth::user()->empresa_id)->get();
         return view('admin.productos.edit', compact('producto', 'categorias'));
     }
+
+
 
     /**
      * Update the specified resource in storage.

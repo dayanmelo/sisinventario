@@ -20,7 +20,7 @@ class CompraController extends Controller
      */
     public function index()
     {
-        $compras = Compra::with('detalles')->get();
+        $compras = Compra::where('empresa_id',Auth::user()->empresa_id)->with('detalles')->get();
         return view('admin.compras.index', compact('compras'));
     }
 

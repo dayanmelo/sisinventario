@@ -13,7 +13,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::where('empresa_id',Auth::user()->empresa_id)->get();
         return view('admin.clientes.index', compact('clientes'));
     }
 

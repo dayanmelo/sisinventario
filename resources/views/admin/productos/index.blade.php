@@ -12,6 +12,10 @@
                     <a href="{{url('/admin/productos/create')}}" class="btn btn-sm btn-primary">
                         Crear nuevo
                     </a>
+                    <a href="{{url('/admin/productos/pdf')}}" target="_blank" class="btn btn-sm btn-warning">
+                        <i class="fas fa-download"></i>
+                         Inventario
+                    </a>
                 </ol>
             </div>
         </div>
@@ -24,12 +28,6 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-outline card-primary">
-                <div class="card-header">
-                    <h3 class="card-title"></h3>
-                    <div class="card-tools">
-
-                    </div>
-                </div>
                 <div class="card-body table-responsive">
                     <table class="table table-bordered table-hover table-sm table-striped" id="mitabla">
                         <thead>

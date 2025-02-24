@@ -14,7 +14,7 @@ class CategoriaController extends Controller
     public function index()
     {
         $usuario = Auth::user();
-        $categorias = Categoria::all();
+        $categorias = Categoria::where('empresa_id',Auth::user()->empresa_id)->get();
         return view('admin.categorias.index', compact('categorias', 'usuario'));
     }
 

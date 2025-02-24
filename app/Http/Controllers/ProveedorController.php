@@ -15,7 +15,7 @@ class ProveedorController extends Controller
     public function index()
     {
         $empresa = Empresa::where('id',Auth::user()->empresa_id)->first();
-        $proveedores = Proveedor::all();
+        $proveedores = Proveedor::where('empresa_id',Auth::user()->empresa_id)->get();
         return view('admin.proveedores.index', compact('proveedores','empresa'));
     }
 
