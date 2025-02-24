@@ -26,11 +26,6 @@
                         <a href="{{url('/admin/compras')}}" rel="noopener" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Volver</a>
                     </div>
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-primary " style="margin-right: 5px;">
-                            <i class="fas fa-download"></i> Generate PDF
-                        </button>
-                    </div>
                     <!-- /.card-tools -->
                 </div>
                 <!-- /.card-header -->

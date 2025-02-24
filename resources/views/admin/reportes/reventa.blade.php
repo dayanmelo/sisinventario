@@ -30,53 +30,84 @@
         .table-bordered thead th{
             border-bottom-width: 2px;
         }
+
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.2;
+            font-size: 100px;
+            color: red;
+            z-index: -1;
+            white-space: nowrap;
+            text-align: center;
+            pointer-events: none;
+        }
+
     </style>
+
 
     <title>Cierre</title>
 </head>
 <body>
 
+@if($venta->estado == '1')
+    <div class="watermark">ANULADA</div>
+@endif
 
-<table border="0" class="table table-striped">
+<table border="0" >
     <tr>
-        <td width="100px" style="text-align: center">
+        <td width="40px" style="text-align: center">
             <img src="{{public_path('storage/'.$empresa->logo)}}" width="130px" alt="Logo"><br>
             <p>{{$empresa->nombre_empresa}}</p>
         </td>
-        <td width="650px" style="text-align: center"><strong style="font-size: 30px">Cierre</strong></td>
+        <td width="350px" style="text-align: center"><strong style="font-size: 30px">Venta</strong></td>
         <td width="200px" style="text-align: center; vertical-align: middle">
-            <b>Fecha: </b>{{ \Carbon\Carbon::parse($cierre->fecha)->format('d/m/Y h:i a') }}
+            <b>Fecha: </b>{{ \Carbon\Carbon::parse($venta->fecha)->format('d/m/Y h:i a') }}
         </td>
     </tr>
 </table>
-
-<table border="0">
+<br>
+<table border="0" class="table table-bordered">
     <tr>
-        <td width="500px" style="font-size: 30px;text-align: center">Total: $ {{number_format($cierre->precio_total,0,',','.')}}</td>
-        <td width="500px" style="font-size: 30px;text-align: center">Ganancia: $ {{number_format($cierre->ganancia,0,',','.')}}</td>
+        <td colspan="4" style="vertical-align: middle;text-align: center;background-color: #40c4b6">Datos cliente</td>
+    </tr>
+    <tr>
+        <td width="60px" style="text-align: center">Cliente</td>
+        <td width="50px">{{$venta->cliente->nombre_cliente}}</td>
+        <td width="60px" style="text-align: center">Celular</td>
+        <td width="40px">{{$venta->cliente->telefono}}</td>
+    </tr>
+    <tr>
+        <td width="60px" style="text-align: center">Direccion</td>
+        <td width="50px">{{$venta->cliente->direccion}}</td>
+        <td colspan="2"></td>
     </tr>
 </table>
 <br>
 <table class="table table-bordered">
     <tr>
-        <th width="120px" style="background-color: #40c4b6">Codigo</th>
-        <th width="250px" style="background-color: #40c4b6">Producto</th>
+        <td colspan="5" style="vertical-align: middle;text-align: center;background-color: #40c4b6">Datos Venta</td>
+    </tr>
+    <tr>
+        <th width="80px" style="background-color: #40c4b6">N°</th>
+        <th width="150px" style="background-color: #40c4b6">Producto</th>
         <th width="70" style="background-color: #40c4b6">Cantidad</th>
-        <th width="90" style="background-color: #40c4b6">Precio Compra</th>
-        <th width="90" style="background-color: #40c4b6">Precio Venta</th>
-        <th width="100" style="background-color: #40c4b6">SubTotal</th>
-        <th width="100" style="background-color: #40c4b6">Ganancia</th>
+        <th width="70" style="background-color: #40c4b6">Precio Unitario</th>
+        <th width="90" style="background-color: #40c4b6">Subtotal</th>
     </tr>
     <tbody>
-    @foreach($cierre->detallescierre as $detalle)
+    <?php
+    $cont = 1;
+    ?>
+    @foreach($venta->detallesventa as $detalle)
         <tr>
-            <td style="text-align: center">{{$detalle->producto->codigo}}</td>
+            <td style="text-align: center">{{$cont++}}</td>
             <td>{{$detalle->producto->nombre}}</td>
-            <td style="text-align: center;vertical-align: middle">{{$detalle->cantidad}}</td>
-            <td style="text-align: center">$ {{number_format($detalle->precio_compra,0,',','.')}}</td>
-            <td style="text-align:center">$ {{number_format($detalle->precio_venta,0,',','.')}}</td>
-            <td style="text-align: center">$ {{number_format($detalle->precio_total,0,',','.')}}</td>
-            <td style="text-align: center">$ {{number_format($detalle->ganancia,0,',','.')}}</td>
+            <td style="text-align: center">{{$detalle->cantidad}}</td>
+            <td style="text-align:center">$ {{number_format($detalle->precio_unitario,0,',','.')}}</td>
+            <td style="text-align: center">$ {{number_format($detalle->precio_unitario * $detalle->cantidad,0,',','.')}}</td>
         </tr>
     @endforeach
     </tbody>

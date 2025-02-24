@@ -132,7 +132,7 @@ class CierreController extends Controller
         $detalles = DetalleCierre::with('producto')->where('cierre_id',$id)->get();
         $id_empresa = Auth::user()->empresa_id;
         $empresa = Empresa::where('id',$id_empresa)->first();
-        $pdf = Pdf::loadView('admin.cierres.pdf', compact('empresa', 'cierre', 'detalles'));
+        $pdf = PDF::loadView('admin.cierres.pdf', compact('empresa', 'cierre', 'detalles'));
         $pdf->setPaper('A4', 'landscape');
         return $pdf->stream();
     }

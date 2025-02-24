@@ -12,7 +12,7 @@
                     <a href="{{url('/admin/productos/create')}}" class="btn btn-sm btn-primary">
                         Crear nuevo
                     </a>
-                    <a href="{{url('/admin/productos/pdf')}}" target="_blank" class="btn btn-sm btn-warning">
+                    <a href="{{url('/admin/reportes/re_producto')}}" target="_blank" class="btn btn-sm btn-warning">
                         <i class="fas fa-download"></i>
                          Inventario
                     </a>

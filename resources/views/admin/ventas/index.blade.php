@@ -71,6 +71,9 @@
                                         @if($venta->estado == '0')
                                             <a href="{{url('/admin/ventas',$venta->id)}}" class="btn btn-info"><i class="fas fa-w fa-eye"></i></a>
                                             <a href="{{url('/admin/ventas/'.$venta->id.'/edit')}}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="{{url('/admin/reportes/reventa',$venta->id)}}" target="_blank"class="btn btn-warning">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </a>
                                             <form action="{{url('/admin/ventas',$venta->id)}}" method="post"
                                                   onclick="preguntar{{$venta->id}}(event)" id="miFormulario{{$venta->id}}">
                                                 @csrf
@@ -79,6 +82,9 @@
                                             </form>
                                         @else
                                             <a href="{{url('/admin/ventas',$venta->id)}}" class="btn btn-info"><i class="fas fa-w fa-eye"></i></a>
+                                            <a href="{{url('/admin/reportes/reventa',$venta->id)}}" target="_blank"class="btn btn-warning">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </a>
                                         @endif
 
                                         <script>
@@ -127,7 +133,7 @@
                 <div class="modal fade" id="modal-productos-{{ $venta->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
-                            <div class="modal-header bg-info">
+                            <div class="modal-header {{ $venta->estado == '1' ? 'bg-danger' : 'bg-info' }}">
                                 <h5 class="modal-title">Productos de la Compra <strong style="font-size: 20px" class="badge bg-primary">{{ \Carbon\Carbon::parse($venta->fecha)->format('d/m/Y h:i a') }}</strong></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                                     <span aria-hidden="true">&times;</span>

@@ -74,8 +74,6 @@ Route::get('/admin/productos/{id}',[App\Http\Controllers\ProductoController::cla
 Route::get('/admin/productos/{id}/edit',[App\Http\Controllers\ProductoController::class,'edit'])->name('admin.productos.edit')->middleware('auth');
 Route::put('/admin/productos/{id}',[App\Http\Controllers\ProductoController::class,'update'])->name('admin.productos.update')->middleware('auth');
 Route::delete('/admin/productos/{id}',[App\Http\Controllers\ProductoController::class,'destroy'])->name('admin.productos.destroy')->middleware('auth');
-Route::get('/admin/productos/pdf',[App\Http\Controllers\ProductoController::class,'pdf'])->name('admin.productos.pdf')->middleware('auth');
-
 
 //Rutas para proveedores
 Route::get('/admin/proveedores',[App\Http\Controllers\ProveedorController::class,'index'])->name('admin.proveedores.index')->middleware('auth');
@@ -161,3 +159,8 @@ Route::delete('/admin/cierres/create/tmp/{id}',[App\Http\Controllers\TmpCierreCo
 Route::delete('/admin/cierres/detalle/{id}',[App\Http\Controllers\DetalleCierreController::class,'destroy'])->name('admin.detalle.cierres.destroy')->middleware('auth');
 Route::post('/admin/cierres/detalle/create/',[App\Http\Controllers\DetalleCierreController::class,'store'])->name('admin.detalle.cierres.store')->middleware('auth');
 Route::put('/admin/cierres/detalles/{id}',[App\Http\Controllers\CierreController::class,'actualizarDetalle'])->name('admin.cierres.actualizarDetalle')->middleware('auth');
+
+
+//Rutas de reportes
+Route::get('/admin/reportes/re_producto',[App\Http\Controllers\ReporteController::class,'repproducto'])->name('admin.reportes.re_producto')->middleware('auth');
+Route::get('/admin/reportes/reventa/{id}',[App\Http\Controllers\ReporteController::class,'repventa'])->name('admin.reportes.reventa')->middleware('auth');

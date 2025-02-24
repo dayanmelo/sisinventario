@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Empresa;
 use App\Models\Producto;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProductoController extends Controller
 {
@@ -21,12 +21,12 @@ class ProductoController extends Controller
         return view('admin.productos.index', compact('productos'));
     }
 
-    public function pdf()
+    public function reporte()
     {
-        $pdf = Pdf::loadView('/admin/productos/pdf');
-        return $pdf->stream();
+        $productos = Producto::with('categoria')->where('empresa_id',Auth::user()->empresa_id)->get();
+        $rep = PDF::loadView('admin.productos.reporte', compact('productos'));
+        return $rep->stream();
     }
-
 
     /**
      * Show the form for creating a new resource.

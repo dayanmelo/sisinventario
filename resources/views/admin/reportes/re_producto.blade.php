@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -43,40 +43,30 @@
             <img src="{{public_path('storage/'.$empresa->logo)}}" width="130px" alt="Logo"><br>
             <p>{{$empresa->nombre_empresa}}</p>
         </td>
-        <td width="650px" style="text-align: center"><strong style="font-size: 30px">Cierre</strong></td>
-        <td width="200px" style="text-align: center; vertical-align: middle">
-            <b>Fecha: </b>{{ \Carbon\Carbon::parse($cierre->fecha)->format('d/m/Y h:i a') }}
-        </td>
+        <td width="650px" style="text-align: center"><strong style="font-size: 30px">Reporte de Inventario</strong></td>
+
     </tr>
 </table>
 
-<table border="0">
-    <tr>
-        <td width="500px" style="font-size: 30px;text-align: center">Total: $ {{number_format($cierre->precio_total,0,',','.')}}</td>
-        <td width="500px" style="font-size: 30px;text-align: center">Ganancia: $ {{number_format($cierre->ganancia,0,',','.')}}</td>
-    </tr>
-</table>
+
 <br>
 <table class="table table-bordered">
     <tr>
+        <th width="60px" style="background-color: #40c4b6">N°</th>
         <th width="120px" style="background-color: #40c4b6">Codigo</th>
         <th width="250px" style="background-color: #40c4b6">Producto</th>
         <th width="70" style="background-color: #40c4b6">Cantidad</th>
-        <th width="90" style="background-color: #40c4b6">Precio Compra</th>
-        <th width="90" style="background-color: #40c4b6">Precio Venta</th>
-        <th width="100" style="background-color: #40c4b6">SubTotal</th>
-        <th width="100" style="background-color: #40c4b6">Ganancia</th>
     </tr>
     <tbody>
-    @foreach($cierre->detallescierre as $detalle)
+    <?php
+    $cont = 1;
+    ?>
+    @foreach($productos as $producto)
         <tr>
-            <td style="text-align: center">{{$detalle->producto->codigo}}</td>
-            <td>{{$detalle->producto->nombre}}</td>
-            <td style="text-align: center;vertical-align: middle">{{$detalle->cantidad}}</td>
-            <td style="text-align: center">$ {{number_format($detalle->precio_compra,0,',','.')}}</td>
-            <td style="text-align:center">$ {{number_format($detalle->precio_venta,0,',','.')}}</td>
-            <td style="text-align: center">$ {{number_format($detalle->precio_total,0,',','.')}}</td>
-            <td style="text-align: center">$ {{number_format($detalle->ganancia,0,',','.')}}</td>
+            <td style="text-align: center">{{$cont++}}</td>
+            <td>{{$producto->codigo}}</td>
+            <td style="text-align: center;vertical-align: middle">{{$producto->nombre}}</td>
+            <td style="text-align: center; vertical-align: middle">{{$producto->stock}}</td>
         </tr>
     @endforeach
     </tbody>

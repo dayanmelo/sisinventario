@@ -29,9 +29,9 @@
                         </div>
 
                         <div class="card-tools">
-                            <button type="button" class="btn btn-primary " style="margin-right: 5px;">
-                                <i class="fas fa-download"></i> Generate PDF
-                            </button>
+                            <a href="{{url('/admin/cierres/pdf',$cierre->id)}}" target="_blank" class="btn btn-primary">
+                                <i class="fas fa-download"></i> Generar PDF
+                            </a>
                         </div>
                         <!-- /.card-tools -->
                     </div>
