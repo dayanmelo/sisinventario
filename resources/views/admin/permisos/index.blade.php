@@ -5,11 +5,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1><b>Roles</b>/Listado de Roles</h1>
+                <h1><b>Permisos</b>/Listado de Permisos</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <a href="{{url('/admin/roles/create')}}" class="btn btn-sm btn-primary">
+                    <a href="{{url('/admin/permisos/create')}}" class="btn btn-sm btn-primary">
                         Crear nuevo
                     </a>
                 </ol>
@@ -29,7 +29,7 @@
                         <thead>
                         <tr>
                             <th style="text-align: center">N°</th>
-                            <th>Rol</th>
+                            <th>Permiso</th>
                             <th style="text-align: center">Acciones</th>
                         </tr>
                         </thead>
@@ -37,23 +37,22 @@
                         <?php
                         $contador = 1;
                         ?>
-                        @foreach($roles as $role)
+                        @foreach($permisos as $permiso)
                             <tr>
                                 <td style="text-align: center">{{$contador++}}</td>
-                                <td>{{$role->name}}</td>
+                                <td>{{$permiso->name}}</td>
                                 <td style="text-align: center">
                                     <div class="btn-group">
-                                        <a href="{{url('/admin/roles',$role->id)}}" class="btn btn-info"><i class="fas fa-w fa-eye"></i></a>
-                                        <a href="{{url('/admin/roles/'.$role->id.'/asignar')}}" class="btn btn-primary"><i class="fas fa-user-check"></i></a>
-                                        <a href="{{url('/admin/roles/'.$role->id.'/edit')}}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
-                                        <form action="{{url('/admin/roles',$role->id)}}" method="post"
-                                              onclick="preguntar{{$role->id}}(event)" id="miFormulario{{$role->id}}">
+                                        <a href="{{url('/admin/permisos',$permiso->id)}}" class="btn btn-info"><i class="fas fa-w fa-eye"></i></a>
+                                        <a href="{{url('/admin/permisos/'.$permiso->id.'/edit')}}" class="btn btn-success"><i class="fas fa-pencil-alt"></i></a>
+                                        <form action="{{url('/admin/permisos',$permiso->id)}}" method="post"
+                                              onclick="preguntar{{$permiso->id}}(event)" id="miFormulario{{$permiso->id}}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" style="border-radius: 0px 5px 5px 0px" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                         </form>
                                         <script>
-                                            function preguntar{{$role->id}}(event){
+                                            function preguntar{{$permiso->id}}(event){
                                                 event.preventDefault();
                                                 Swal.fire({
                                                     title: "¿Seguro desea eliminar este registro?",
@@ -64,11 +63,11 @@
                                                 }).then((result) => {
                                                     /* Read more about isConfirmed, isDenied below */
                                                     if (result.isConfirmed) {
-                                                        var form = $('#miFormulario{{$role->id}}');
+                                                        var form = $('#miFormulario{{$permiso->id}}');
                                                         form.submit();
                                                         Swal.fire({
                                                             position: "center",
-                                                            title: "Se elimino el rol exitosamente",
+                                                            title: "Se elimino el permiso exitosamente",
                                                             showConfirmButton: false,
                                                             timer: 1500
                                                         });

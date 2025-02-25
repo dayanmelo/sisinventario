@@ -6,6 +6,7 @@ use App\Models\Empresa;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -17,6 +18,52 @@ class RoleController extends Controller
     {
         $roles = Role::all();
         return view('admin.roles.index', compact('roles'));
+    }
+
+    public function asignar($id)
+    {
+        $rol = Role::find($id);
+        $permisos = Permission::all()->groupBy(function ($permiso){
+            if (stripos($permiso->name,'Us') !== false){
+                return 'Usuarios';
+            }elseif (stripos($permiso->name,'Rol') !== false){
+                return 'Roles';
+            }elseif (stripos($permiso->name,'Con') !== false){
+                return 'Configuración';
+            }elseif (stripos($permiso->name,'Per') !== false){
+                return 'Permisos';
+            }elseif (stripos($permiso->name,'Cie') !== false){
+                return 'Cierres';
+            }elseif (stripos($permiso->name,'Cat') !== false){
+                return 'Categorias';
+            }elseif (stripos($permiso->name,'Prod') !== false){
+                return 'Productos';
+            }elseif (stripos($permiso->name,'Prov') !== false){
+                return 'Proveedores';
+            }elseif (stripos($permiso->name,'Ven') !== false){
+                return 'Ventas';
+            }elseif (stripos($permiso->name,'Com') !== false){
+                return 'Compras';
+            }elseif (stripos($permiso->name,'Cli') !== false){
+                return 'Clientes';
+            }
+        });
+        return view('admin.roles.asignar', compact('permisos','rol'));
+    }
+
+    public function update_asignar(Request $request, $id)
+    {
+        //$dato = request()->all();
+        //return response()->json($dato);
+        $request->validate([
+            'permisos' => 'required|array',
+        ]);
+        $rol = Role::find($id);
+
+        $rol->permissions()->sync($request->input('permisos'));
+        return redirect()->back()
+            ->with('mensaje', 'Permisos asignados exitosamente')
+            ->with('icono', 'success');
     }
 
 

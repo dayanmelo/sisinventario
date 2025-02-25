@@ -341,9 +341,22 @@ return [
             'icon' => 'fas fa-w fa-wrench',
         ],
         [
+            'text' => ' Usuarios',
+            'url' => 'admin/usuarios',
+            'icon' => 'fas fa-w fa-users',
+            'can' => 'Usuarios',
+        ],
+        [
             'text' => ' Roles',
             'url' => 'admin/roles',
             'icon' => 'fas fa-fw fa-id-card',
+            'can' => 'Roles',
+        ],
+        [
+            'text' => ' Permisos',
+            'url' => 'admin/permisos',
+            'icon' => 'fas fa-w fa-user-shield',
+            'can' => 'Permisos',
         ],
         /*[
             'text' => 'Roles',
@@ -355,46 +368,49 @@ return [
                 ],
             ],
         ],*/
-        [
-            'text' => ' Usuarios',
-            'url' => 'admin/usuarios',
-            'icon' => 'fas fa-w fa-users',
-        ],
+
         ['header' => 'ALMACEN'],
         [
             'text' => ' Categorias',
             'url' => 'admin/categorias',
             'icon' => 'fas fa-w fa-tags',
+            'can' => 'Categorias',
         ],
         [
             'text' => ' Productos',
             'url' => 'admin/productos',
             'icon' => 'fas fa-w fa-clipboard',
+            'can' => 'Productos',
         ],
         [
             'text' => ' Proveedores',
             'url' => 'admin/proveedores',
             'icon' => 'fas fa-w fa-truck',
+            'can' => 'Proveedores',
         ],
         [
             'text' => ' Compras',
             'url' => 'admin/compras',
             'icon' => 'fas fa-w fa-cart-plus',
+            'can' => 'Compras',
         ],
         [
             'text' => ' Cierres',
             'url' => 'admin/cierres',
             'icon' => 'fas fa-w fa-cash-register',
+            'can' => 'Cierres',
         ],
         [
             'text' => ' Clientes',
             'url' => 'admin/clientes',
             'icon' => 'fas fa-w fa-user-circle',
+            'can' => 'Clientes',
         ],
         [
             'text' => ' Ventas',
             'url' => 'admin/ventas',
             'icon' => 'fas fa-w fa-file-invoice-dollar',
+            'can' => 'Ventas',
         ],
         /*[
             'text' => 'multilevel',
