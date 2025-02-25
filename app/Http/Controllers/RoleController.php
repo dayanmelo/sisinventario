@@ -46,6 +46,8 @@ class RoleController extends Controller
                 return 'Compras';
             }elseif (stripos($permiso->name,'Cli') !== false){
                 return 'Clientes';
+            }elseif (stripos($permiso->name,'Bac') !== false){
+                return 'Copia De Seguridad';
             }
         });
         return view('admin.roles.asignar', compact('permisos','rol'));

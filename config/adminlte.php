@@ -334,30 +334,7 @@ return [
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],*/
-        ['header' => 'AJUSTES DEL SISTEMA'],
-        [
-            'text' => ' Configuración',
-            'url' => 'admin/configuracion',
-            'icon' => 'fas fa-w fa-wrench',
-        ],
-        [
-            'text' => ' Usuarios',
-            'url' => 'admin/usuarios',
-            'icon' => 'fas fa-w fa-users',
-            'can' => 'Usuarios',
-        ],
-        [
-            'text' => ' Roles',
-            'url' => 'admin/roles',
-            'icon' => 'fas fa-fw fa-id-card',
-            'can' => 'Roles',
-        ],
-        [
-            'text' => ' Permisos',
-            'url' => 'admin/permisos',
-            'icon' => 'fas fa-w fa-user-shield',
-            'can' => 'Permisos',
-        ],
+
         /*[
             'text' => 'Roles',
             'icon' => 'fas fa-fw fa-id-card',
@@ -411,6 +388,36 @@ return [
             'url' => 'admin/ventas',
             'icon' => 'fas fa-w fa-file-invoice-dollar',
             'can' => 'Ventas',
+        ],
+        ['header' => 'AJUSTES DEL SISTEMA'],
+        [
+            'text' => ' Configuración',
+            'url' => 'admin/configuracion',
+            'icon' => 'fas fa-w fa-wrench',
+        ],
+        [
+            'text' => ' Usuarios',
+            'url' => 'admin/usuarios',
+            'icon' => 'fas fa-w fa-users',
+            'can' => 'Usuarios',
+        ],
+        [
+            'text' => ' Roles',
+            'url' => 'admin/roles',
+            'icon' => 'fas fa-fw fa-id-card',
+            'can' => 'Roles',
+        ],
+        [
+            'text' => ' Permisos',
+            'url' => 'admin/permisos',
+            'icon' => 'fas fa-w fa-user-shield',
+            'can' => 'Permisos',
+        ],
+        [
+            'text' => ' Copias de Seguridad',
+            'url' => 'admin/backups',
+            'icon' => 'fas fa-w fa-database',
+            'can' => 'Permisos',
         ],
         /*[
             'text' => 'multilevel',

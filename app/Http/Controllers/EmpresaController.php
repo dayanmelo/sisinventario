@@ -92,7 +92,7 @@ class EmpresaController extends Controller
 
         $usuario = new User();
 
-        $usuario->name = "Administrador";
+        $usuario->name = $request->nombre_empresa;
         $usuario->email = $request->correo;
         $usuario->password = Hash::make($request['telefono']);
         $usuario->empresa_id = $empresa->id;

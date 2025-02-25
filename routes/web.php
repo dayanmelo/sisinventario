@@ -176,3 +176,8 @@ Route::put('/admin/cierres/detalles/{id}',[App\Http\Controllers\CierreController
 //Rutas de reportes
 Route::get('/admin/reportes/re_producto',[App\Http\Controllers\ReporteController::class,'repproducto'])->name('admin.reportes.re_producto')->middleware('auth','can:Reporte Producto');
 Route::get('/admin/reportes/reventa/{id}',[App\Http\Controllers\ReporteController::class,'repventa'])->name('admin.reportes.reventa')->middleware('auth','can:Reporte Venta');
+
+
+//Rutas para backup
+Route::get('/admin/backups',[App\Http\Controllers\BackupController::class,'index'])->name('admin.backups.index')->middleware('auth','can:Backup');
+Route::get('/admin/backups/create',[App\Http\Controllers\BackupController::class,'create'])->name('admin.backups.create')->middleware('auth','can:Crear Backup');
