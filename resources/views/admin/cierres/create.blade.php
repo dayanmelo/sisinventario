@@ -58,8 +58,8 @@
                                                                     <span aria-hidden="true">×</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">
-                                                                <table class="table table-bordered table-hover table-sm table-striped table-responsive" id="mitabla">
+                                                            <div class="modal-body  table-responsive">
+                                                                <table class="table table-bordered table-hover table-sm table-striped" id="mitabla">
                                                                     <thead>
                                                                     <tr>
                                                                         <th style="text-align: center">N°</th>

@@ -20,15 +20,16 @@ class ReporteController extends Controller
         $empresa = Empresa::where('id',Auth::user()->empresa_id)->first();
         $productos = Producto::where('empresa_id',Auth::user()->empresa_id)->get();
         $rep_pro = PDF::loadView('admin.reportes.re_producto', compact('empresa','productos'));
-        return $rep_pro->stream();
+        return $rep_pro->download('Inventario.pdf');
     }
 
     public  function repventa($id)
     {
         $empresa = Empresa::where('id',Auth::user()->empresa_id)->first();
         $venta = Venta::with('detallesventa','cliente')->findOrFail($id);
+        $cliente = $venta->cliente;
         $rep_venta = PDF::loadView('admin.reportes.reventa', compact('empresa','venta'));
-        return $rep_venta->stream();
+        return $rep_venta->download('Venta_de_'.$cliente->nombre_cliente.'.pdf');
     }
 
     /**

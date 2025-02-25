@@ -98,7 +98,7 @@ class EmpresaController extends Controller
         $usuario->empresa_id = $empresa->id;
 
         $usuario->save();
-        $usuario->assignRole('ADMINISTRADOR');
+        $usuario->assignRole('SUPER_ADMIN');
 
         Auth::login($usuario);
 

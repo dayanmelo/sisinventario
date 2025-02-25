@@ -22,12 +22,6 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card card-outline card-info">
-                <div class="card-header">
-                    <h3 class="card-title"></h3>
-                    <div class="card-tools">
-
-                    </div>
-                </div>
                 <div class="card-body">
                         <div class="row">
                             <div class="col-md-4">

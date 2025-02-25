@@ -32,7 +32,7 @@
         }
     </style>
 
-    <title>Cierre</title>
+    <title>Reporte Inventario</title>
 </head>
 <body>
 

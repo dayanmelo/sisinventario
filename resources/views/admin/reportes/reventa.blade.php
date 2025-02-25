@@ -48,7 +48,7 @@
     </style>
 
 
-    <title>Cierre</title>
+    <title>Venta de {{$venta->cliente->nombre_cliente}}</title>
 </head>
 <body>
 
