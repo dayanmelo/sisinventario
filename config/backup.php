@@ -254,7 +254,7 @@ return [
      */
     'monitor_backups' => [
         [
-            'name' => env('APP_NAME', 'laravel-backup'),
+            'name' => env('laravel-backup', 'laravel-backup'),
             'disks' => ['local'],
             'health_checks' => [
                 \Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class => 1,
@@ -337,5 +337,6 @@ return [
          */
         'retry_delay' => 0,
     ],
+    'dump_command_path' => 'C:/xampp/mysql/bin',
 
 ];

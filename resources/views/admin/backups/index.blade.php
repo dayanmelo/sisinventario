@@ -49,7 +49,9 @@
                                 <td style="text-align: center;vertical-align: middle">{{$contador++}}</td>
                                 <td>{{basename($backup)}}</td>
                                 <td>{{date('Y-m-d h:i:s a',Storage::lastModified($backup))}}</td>
-                                <td></td>
+                                <td style="text-align: center;vertical-align: middle">
+                                    <a id="cargar" href="{{url('/admin/backups/descargar',basename($backup))}}" class="btn btn-warning"><i class="fas faw fa-download"></i></a>
+                                </td>
                             </tr>
                         @endforeach
 
@@ -69,6 +71,7 @@
 @stop
 
 @section('js')
+
     <script>
         $('#mitabla').DataTable({
             "pageLength":10,
@@ -101,6 +104,7 @@
         }).buttons().container().appendTo('#example1_wrapper .row:eq(0)');
 
     </script>
+    
 @stop
 
 

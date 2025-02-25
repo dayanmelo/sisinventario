@@ -45,6 +45,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
+            'dump' => [
+                'dump_binary_path' => 'C:/xampp/mysql/bin', // Sin la barra al final
+                'use_single_transaction' => true,
+                'timeout' => 60 * 5, // 5 minutos
+            ],
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),

@@ -181,3 +181,4 @@ Route::get('/admin/reportes/reventa/{id}',[App\Http\Controllers\ReporteControlle
 //Rutas para backup
 Route::get('/admin/backups',[App\Http\Controllers\BackupController::class,'index'])->name('admin.backups.index')->middleware('auth','can:Backup');
 Route::get('/admin/backups/create',[App\Http\Controllers\BackupController::class,'create'])->name('admin.backups.create')->middleware('auth','can:Crear Backup');
+Route::get('/admin/backups/descargar/{nombreArechivo}',[App\Http\Controllers\BackupController::class,'descargar'])->name('admin.backups.descargar')->middleware('auth','can:Descargar Backup');

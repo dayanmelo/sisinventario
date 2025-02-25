@@ -25,4 +25,10 @@ class BackupController extends Controller
                 ->with('icono','error');
         }
     }
+
+    public function descargar($nombreArchivo)
+    {
+        $file ='laravel-backup/'.$nombreArchivo;
+        return Storage::download($file);
+    }
 }
