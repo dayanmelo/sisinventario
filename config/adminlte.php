@@ -394,6 +394,7 @@ return [
             'text' => ' Configuración',
             'url' => 'admin/configuracion',
             'icon' => 'fas fa-w fa-wrench',
+            'can' => 'Configuracion',
         ],
         [
             'text' => ' Usuarios',
