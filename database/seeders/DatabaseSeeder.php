@@ -24,6 +24,6 @@ class DatabaseSeeder extends Seeder
 
         $administrador = Role::create(['name' => 'SUPER_ADMIN']);
 
-        Producto::factory()->count(100)->create();
+        // Producto::factory()->count(100)->create();
     }
 }
