@@ -30,7 +30,7 @@
                     </div>
                     <!-- /.card-tools -->
                 </div>
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table class="table table-bordered table-hover table-sm table-striped" id="mitabla">
                         <thead>
                         <tr>
