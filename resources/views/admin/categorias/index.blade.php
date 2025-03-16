@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card card-outline card-primary">
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <table class="table table-bordered table-hover table-sm table-striped" id="mitabla">
                         <thead>
                         <tr>
