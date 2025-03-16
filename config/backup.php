@@ -77,7 +77,7 @@ return [
              * For a complete list of available customization options, see https://github.com/spatie/db-dumper
              */
             'databases' => [
-                'mysql',
+                'pgsql',
             ],
         ],
 
@@ -337,6 +337,6 @@ return [
          */
         'retry_delay' => 0,
     ],
-    'dump_command_path' => 'C:/xampp/mysql/bin',
+    'dump_command_path' => '/usr/bin/',
 
 ];
