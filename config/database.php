@@ -43,6 +43,15 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
+        'pgsql' => [
+    'dump' => [
+        'dump_binary_path' => '/usr/bin/', // Ruta donde está pg_dump
+        'use_single_transaction' => true,
+        'timeout' => 60, // Tiempo límite para el dump
+    ],
+],
+
+
         'mysql' => [
             'driver' => 'mysql',
             'dump' => [
