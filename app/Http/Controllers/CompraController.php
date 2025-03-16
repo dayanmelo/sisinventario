@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Compra;
-use App\Models\detalleCompra;
+use App\Models\DetalleCompra;
 use App\Models\Empresa;
 use App\Models\Producto;
 use App\Models\Proveedor;
