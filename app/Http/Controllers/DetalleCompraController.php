@@ -35,7 +35,7 @@ class DetalleCompraController extends Controller
 
         if($producto){
 
-            $detalle_compra_existe = detalleCompra::where('producto_id',$producto->id)
+            $detalle_compra_existe = DetalleCompra::where('producto_id',$producto->id)
                 ->where('compra_id',$id_compra)
                 ->first();
 
@@ -45,7 +45,7 @@ class DetalleCompraController extends Controller
                 return response()->json(['success'=>true,'message'=>'Producto encontrado']);
             }else{
 
-                $detalle_compra = new detalleCompra();
+                $detalle_compra = new DetalleCompra();
                 $detalle_compra->cantidad = $request->cantidad;
                 $detalle_compra->precio_unitario = '0';
                 $detalle_compra->producto_id = $producto->id;
@@ -91,7 +91,7 @@ class DetalleCompraController extends Controller
      */
     public function destroy($id)
     {
-        detalleCompra::destroy($id);
+        DetalleCompra::destroy($id);
         return response()->json(['success'=>true]);
     }
 }

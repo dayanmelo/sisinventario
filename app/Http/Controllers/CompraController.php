@@ -70,7 +70,7 @@ class CompraController extends Controller
 
             $producto = Producto::where('id', $tmp_compra->producto_id)->first();
 
-            $detalle_compra = new detalleCompra();
+            $detalle_compra = new DetalleCompra();
             $detalle_compra->cantidad = $tmp_compra->cantidad;
             if (isset($preciosCompra[$index])) {
                 $detalle_compra->precio_unitario = $preciosCompra[$index]; // Asigna el precio individual
@@ -107,7 +107,7 @@ class CompraController extends Controller
         $departamento = DB::table('states')->where('id',$empresa->departamento)->first();
 
         $compra = Compra::with('detalles','proveedor')->findOrFail($id);
-        $detalles = detalleCompra::with('producto')->where('compra_id',$id)->get();
+        $detalles = DetalleCompra::with('producto')->where('compra_id',$id)->get();
 
         return view('admin.compras.show', compact('compra','detalles', 'empresa', 'pais', 'departamento'));
     }
